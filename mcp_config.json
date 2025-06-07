@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "bas-ip": {
+      "command": "python3",
+      "args": ["bas_ip_mcp_server.py"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "description": "BAS-IP Android Panels API documentation server",
+      "tools": [
+        {
+          "name": "search_api_methods",
+          "description": "Search for BAS-IP API methods by keyword"
+        },
+        {
+          "name": "get_api_method_details",
+          "description": "Get detailed information about a specific BAS-IP API method"
+        },
+        {
+          "name": "list_all_api_methods",
+          "description": "List all available BAS-IP API methods"
+        },
+        {
+          "name": "update_knowledge_base",
+          "description": "Update the BAS-IP API knowledge base by fetching latest documentation"
+        },
+        {
+          "name": "get_knowledge_base_status",
+          "description": "Get the current status of the BAS-IP knowledge base"
+        }
+      ],
+      "resources": [
+        {
+          "name": "knowledge-base",
+          "description": "Complete BAS-IP API knowledge base in JSON format"
+        },
+        {
+          "name": "markdown-docs",
+          "description": "Markdown formatted BAS-IP API documentation"
+        }
+      ]
+    }
+  }
+}

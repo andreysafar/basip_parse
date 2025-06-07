@@ -1,0 +1,183 @@
+{
+  "openDoor": {
+    "name": "Open Door",
+    "endpoint": "/api/v1/door/open",
+    "method": "POST",
+    "description": "Opens the door lock for a specified duration",
+    "parameters": [
+      {
+        "name": "door_id",
+        "type": "integer",
+        "description": "ID of the door to open (1-4)",
+        "required": "true"
+      },
+      {
+        "name": "duration",
+        "type": "integer",
+        "description": "Duration to keep door open in seconds (1-60)",
+        "required": "false"
+      }
+    ],
+    "example": "{\n  \"door_id\": 1,\n  \"duration\": 5\n}",
+    "response": "{\n  \"status\": \"success\",\n  \"message\": \"Door opened\",\n  \"door_id\": 1\n}"
+  },
+  "getDeviceInfo": {
+    "name": "Get Device Information",
+    "endpoint": "/api/v1/device/info",
+    "method": "GET",
+    "description": "Returns information about the Android panel device",
+    "parameters": [],
+    "example": "",
+    "response": "{\n  \"device_id\": \"BAS-IP-AV-01\",\n  \"model\": \"AV-08FB\",\n  \"firmware\": \"3.2.1\",\n  \"serial\": \"A1B2C3D4E5\",\n  \"ip_address\": \"192.168.1.100\"\n}"
+  },
+  "makeCall": {
+    "name": "Make SIP Call",
+    "endpoint": "/api/v1/sip/call",
+    "method": "POST",
+    "description": "Initiates a SIP call to specified number or apartment",
+    "parameters": [
+      {
+        "name": "number",
+        "type": "string",
+        "description": "SIP number or apartment number to call",
+        "required": "true"
+      },
+      {
+        "name": "video",
+        "type": "boolean",
+        "description": "Enable video call",
+        "required": "false"
+      }
+    ],
+    "example": "{\n  \"number\": \"101\",\n  \"video\": true\n}",
+    "response": "{\n  \"status\": \"success\",\n  \"call_id\": \"call_12345\",\n  \"state\": \"calling\"\n}"
+  },
+  "captureSnapshot": {
+    "name": "Capture Camera Snapshot",
+    "endpoint": "/api/v1/camera/snapshot",
+    "method": "GET",
+    "description": "Captures a snapshot from the device camera",
+    "parameters": [
+      {
+        "name": "camera_id",
+        "type": "integer",
+        "description": "Camera ID (0 for main, 1 for secondary)",
+        "required": "false"
+      },
+      {
+        "name": "resolution",
+        "type": "string",
+        "description": "Image resolution (e.g., '1920x1080', '1280x720')",
+        "required": "false"
+      }
+    ],
+    "example": "",
+    "response": "{\n  \"status\": \"success\",\n  \"image_url\": \"/snapshots/2024-01-15_10-30-45.jpg\",\n  \"timestamp\": \"2024-01-15T10:30:45Z\"\n}"
+  },
+  "getAccessLog": {
+    "name": "Get Access Log",
+    "endpoint": "/api/v1/access/log",
+    "method": "GET",
+    "description": "Retrieves access log entries",
+    "parameters": [
+      {
+        "name": "limit",
+        "type": "integer",
+        "description": "Number of entries to return (max 100)",
+        "required": "false"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "description": "Offset for pagination",
+        "required": "false"
+      },
+      {
+        "name": "from_date",
+        "type": "string",
+        "description": "Filter entries from this date (ISO 8601)",
+        "required": "false"
+      }
+    ],
+    "example": "",
+    "response": "{\n  \"status\": \"success\",\n  \"total\": 150,\n  \"entries\": [\n    {\n      \"id\": 1001,\n      \"timestamp\": \"2024-01-15T09:15:30Z\",\n      \"type\": \"card\",\n      \"user\": \"John Doe\",\n      \"result\": \"granted\"\n    }\n  ]\n}"
+  },
+  "setVolume": {
+    "name": "Set Audio Volume",
+    "endpoint": "/api/v1/audio/volume",
+    "method": "PUT",
+    "description": "Sets the audio volume for the device",
+    "parameters": [
+      {
+        "name": "volume",
+        "type": "integer",
+        "description": "Volume level (0-100)",
+        "required": "true"
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "description": "Volume type: 'ring', 'voice', 'system'",
+        "required": "false"
+      }
+    ],
+    "example": "{\n  \"volume\": 75,\n  \"type\": \"ring\"\n}",
+    "response": "{\n  \"status\": \"success\",\n  \"volume\": 75,\n  \"type\": \"ring\"\n}"
+  },
+  "rebootDevice": {
+    "name": "Reboot Device",
+    "endpoint": "/api/v1/system/reboot",
+    "method": "POST",
+    "description": "Reboots the Android panel device",
+    "parameters": [
+      {
+        "name": "delay",
+        "type": "integer",
+        "description": "Delay in seconds before reboot",
+        "required": "false"
+      }
+    ],
+    "example": "{\n  \"delay\": 10\n}",
+    "response": "{\n  \"status\": \"success\",\n  \"message\": \"Device will reboot in 10 seconds\"\n}"
+  },
+  "getNetworkSettings": {
+    "name": "Get Network Settings",
+    "endpoint": "/api/v1/network/settings",
+    "method": "GET",
+    "description": "Returns current network configuration",
+    "parameters": [],
+    "example": "",
+    "response": "{\n  \"ip_address\": \"192.168.1.100\",\n  \"subnet_mask\": \"255.255.255.0\",\n  \"gateway\": \"192.168.1.1\",\n  \"dns1\": \"8.8.8.8\",\n  \"dns2\": \"8.8.4.4\",\n  \"dhcp\": true\n}"
+  },
+  "uploadFirmware": {
+    "name": "Upload Firmware",
+    "endpoint": "/api/v1/system/firmware",
+    "method": "POST",
+    "description": "Uploads new firmware to the device",
+    "parameters": [
+      {
+        "name": "file",
+        "type": "file",
+        "description": "Firmware file (.bin or .img)",
+        "required": "true"
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "description": "Firmware version",
+        "required": "true"
+      }
+    ],
+    "example": "",
+    "response": "{\n  \"status\": \"success\",\n  \"message\": \"Firmware uploaded successfully\",\n  \"version\": \"3.3.0\"\n}"
+  },
+  "getCardReaders": {
+    "name": "Get Card Readers Status",
+    "endpoint": "/api/v1/access/readers",
+    "method": "GET",
+    "description": "Returns status of connected card readers",
+    "parameters": [],
+    "example": "",
+    "response": "{\n  \"readers\": [\n    {\n      \"id\": 1,\n      \"type\": \"RFID\",\n      \"status\": \"online\",\n      \"last_read\": \"2024-01-15T10:25:00Z\"\n    },\n    {\n      \"id\": 2,\n      \"type\": \"NFC\",\n      \"status\": \"online\",\n      \"last_read\": null\n    }\n  ]\n}"
+  }
+}
